@@ -1,0 +1,41 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks';
+import VirtualList from '..';
+
+<Meta title="VirtualList" component={VirtualList} />
+
+# VirtualList
+
+## 列表项是固定高度，加载 10 万条数据
+
+<Preview>
+    <Story name="basic" height="400px">
+        {() => {
+            const data = [...Array(100000)].map((value, index) => index);
+            const renderCell = ({ index, style }) => {
+                return (
+                    <div
+                        key={index}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            boxSizing: 'border-box',
+                            height: '48px',
+                            borderBottom: '1px solid #e0e0e0',
+                            ...style,
+                        }}
+                    >
+                        {`虚拟列表测试数据-${data[index]}`}
+                    </div>
+                );
+            };
+            return (
+                <VirtualList
+                    height={300}
+                    rowCount={100000}
+                    rowHeight={48}
+                    rowRenderer={renderCell}
+                />
+            );
+        }}
+    </Story>
+</Preview>

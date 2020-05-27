@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 10 # use nodejs v10 LTS
+cache: npm
+branches:
+  only:
+    - master # build master branch only
+script:
+    - npm run build-storybook
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: dist
+  github-token: $GH_TOKEN
+  keep-history: true
+  on:
+    branch: master
